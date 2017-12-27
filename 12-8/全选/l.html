@@ -11,7 +11,7 @@
 			background: radial-gradient(at 50% 0,#c55478,#1e1e2a) no-repeat;
 		}
 		.regular-checkbox {
-			display: none;
+			/*display: none;*/
 		}
 		.regular-checkbox + label {
 			border: 1px solid #9C9C9C;
@@ -136,8 +136,10 @@
 
 	let arr=new Array(lis.length);
 	arr.fill(false);
-	checkboxCtrl.onclick=listCtrl.onclick=function () {
-		checkboxCtrl.checked=!checkboxCtrl.checked;
+	listCtrl.onclick=function () {
+		if (checkboxCtrl.checked) checkboxCtrl.removeAttribute('checkde');
+		else checkboxCtrl.setAttribute('checked',1);
+		console.log(checkboxCtrl.checked);
 		arr.fill(checkboxCtrl.checked);
 		lis.forEach(function (e,i) {
 			const checkboxs=e.querySelector('input');

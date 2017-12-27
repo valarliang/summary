@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			html {
+
+				width: 100%;
+				height: 100%;
+			}
+			body{
+				margin: 0px;
+				width: 100%;
+				height: 100%;
+			}
+			.main {
+				width: 100%;
+				min-height: 100%;
+				background: url(./image/bg.png);
+			}
+			.logo {
+				display: block;
+				width: 200px;
+				height: 55px;
+				background: url(./image/logo.png) no-repeat;
+				margin: 20px auto;
+			}
+			ul{
+				list-style: none;
+				font-size: 22px;
+				color: #8c949c;
+				font-weight: bold;
+				
+			}
+
+			ul li {
+				position: relative;
+				padding-left: 10px;
+				
+			}
+
+			/*ul li div{
+				height: 98%;
+				width: 1px;
+				border-left: 1px dotted #ccc;
+				position: absolute;
+				left: 14px;
+				top: 18px;
+			}*/
+
+			ul ul{
+				display: none;
+			}
+
+			ul li span {
+				display: block;
+				line-height: 32px;
+				padding-left: 15px;
+				background: url(./image/icon.png) no-repeat left 500px;
+			}
+			
+			ul li span.add {
+				background-position: 0px -30px;
+			}
+			ul li span.line {
+				background-position: 0px 11px;
+			}
+
+			.tree {
+				margin-left: 300px;
+			}
+
+		</style>
+	</head>
+
+	<body>
+		<div class="main">
+			<a href="http://www.miaov.com" class="logo"></a>
+			<div class="tree">
+				<!--<ul >
+					<li>
+						<span class="add">第一级菜单</span>
+						<ul>
+							<li>
+								<span class="add">第二级菜单</span>
+							</li>
+							<li>
+								<span class="add">第二级菜单</span>
+								<ul>
+									<li>
+										<span class="add">第三级菜单</span>
+									</li>
+									<li>
+										<span class="add">第三级菜单</span>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<span class="add">第一级菜单</span>
+				</ul></li> -->
+			</div>
+
+		</div>
+		<script>
+			var arr = [
+		    {
+		        title : "第一级菜单",
+		        child : [
+		        	{title:"第二集菜单"},
+		            {title:"第二集菜单",
+		            child:[
+		            		{title:"第三集菜单"},
+		            		{title:"第三集菜单",
+		            		child:[
+		            			{title:"第四集菜单"},
+		            			{title:"第四集菜单"},
+		            			{title:"第四集菜单"}
+		            		]
+		            		},
+		            		{title:"第三集菜单"}
+		            	]
+		        	},
+		            {
+		            	title:"第二集菜单",
+		            	child:[
+		            		{title:"第三集菜单"},
+		            		{title:"第三集菜单"}
+		            	]
+		            }
+		        ]
+		    },
+		    {
+		        title : "第一级菜单",
+		        child : [
+		        	{title:"第二集菜单"},
+		            {title:"第二集菜单",
+		            child:[
+		            		{title:"第三集菜单"},
+		            		{title:"第三集菜单",
+		            		child:[
+		            			{title:"第四集菜单"},
+		            			{title:"第四集菜单"},
+		            			{title:"第四集菜单"}
+		            		]
+		            		},
+		            		{title:"第三集菜单"}
+		            	]
+		        	},
+		            {
+		            	title:"第二集菜单",
+		            	child:[
+		            		{title:"第三集菜单"},
+		            		{title:"第三集菜单"}
+		            	]
+		            }
+		        ]
+		    },
+		    {
+		    	title:"第一集菜单",
+		    	child : [
+		        	{title:"第二集菜单"},
+		            {title:"第二集菜单",
+		            
+		        	},
+		            {
+		            	title:"第二集菜单",
+		            	child:[
+		            		{title:"第三集菜单"},
+		            		{title:"第三集菜单"}
+		            	]
+		            }
+		        ]
+		         
+		    }
+		];
+		
+		/*
+			通过数据把结构生成出来。
+		*/
+		</script>
+		<script>
+			const tree=document.querySelector('.tree');
+
+			function generate(arr) {
+				let str='';
+				arr.forEach(function (e) {
+					if (e.child) {
+						str+='<li><span class="add">'+e.title+'</span>'+generate(e.child)+'</li>';
+					}else{
+						str+='<li><span>'+e.title+'</span></li>';
+					}
+				})
+				return str='<ul>'+str+'</ul>';
+			}
+			tree.innerHTML=generate(arr);
+
+
+			const add=Array.from(document.querySelectorAll('.add'));
+			let last=null;
+			add.forEach(function (e) {
+				e.flag=1;
+				e.onclick=function () {
+					if (e.flag) {
+						if (this.parentNode.parentNode.parentNode.nodeName=='DIV') {
+							if (last) {
+								last.nextElementSibling.style.display='none';
+								last.className='add';
+								last.flag=1;
+								const childAdd=Array.from(last.nextElementSibling.querySelectorAll('span'));
+								reset(childAdd);
+							}
+							last=this;
+						}
+						this.nextElementSibling.style.display='block';
+						this.className='line';
+					}else {
+						this.nextElementSibling.style.display='none';
+						this.className='add';
+					}
+					this.flag=!this.flag;
+				}
+			})
+			function reset(arr) {
+				arr.forEach(function (e) {
+					if (e.nextElementSibling) {
+						e.nextElementSibling.style.display='none';
+						e.className='add';
+						e.flag=1;
+					}
+				})
+			}
+		</script>
+	</body>
+</html>
