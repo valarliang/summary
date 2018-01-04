@@ -114,7 +114,10 @@
 			files=document.querySelector('#files');
 		let n=1;
 		add.onclick=function () {
-			if (n++>3) return;
+			if (n++>3) {
+				n=4; 
+				return;
+			} 
 			let div1=document.createElement('div'),
 				div2=document.createElement('div'),
 				input1=document.createElement('input'),
@@ -159,7 +162,7 @@
 			del.onclick=function () {
 				const check=Array.from(files.querySelectorAll('.check'));
 				check.forEach(function (e) {
-					if (e.checked) files.removeChild(e.parentNode);
+					if (e.checked) files.removeChild(e.parentNode),n--;
 				})
 			}
 		}
