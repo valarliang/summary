@@ -107,7 +107,7 @@
 	<body>
 		<div id="content">
 			<div id="rightTop">
-				<a href="list.html" class="goback">&lt;&nbsp;返回招聘列表</a>
+				<a href="javascript:;" class="goback">&lt;&nbsp;返回招聘列表</a>
 				<a href="javascript:;">投个简历</a>
 			</div>
 			<div id="title">
@@ -134,6 +134,7 @@
 		<script src="js/data.js"></script>
 		<script>
 			const title=document.querySelector('#title'),
+				goback=document.querySelector('.goback'),
 				bottom=document.querySelector('#bottom');
 			let arr=window.location.hash.split(','),
 				name=arr[0].split('=')[1],
@@ -148,6 +149,12 @@
 				e.l.forEach(el => str+=`<dd>${el}</dd>`);
 				str+='</dl>';
 			})
+			goback.onclick=function () {
+				let arr=window.location.hash.split(',');
+				arr.splice(1,1);
+				window.location.hash=arr.join(',');
+				window.location.href=window.location.href.split('content.html').join('list.html');
+			}
 			bottom.innerHTML=str;
 		</script>
 	</body>

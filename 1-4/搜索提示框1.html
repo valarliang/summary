@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        input{
+            width: 100%;
+            height: 30px;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            display: none;
+        }
+        li{
+            list-style: none;
+            background-color: #009999;
+            margin-top: 3px;
+            line-height: 30px;
+            width: 100%;
+        }
+        a{
+            text-decoration: none;
+            color:white;
+            display: block;
+            width: 100%;
+        }
+        a:hover,#list .hover{
+            background-color: #00FF99;
+        }
+        #box{
+            width: 500px;
+            margin: 100px auto 0;
+        }
+        .select{
+            background-color: #60625b;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+<div id="box">
+
+
+    <input type="text" id="s" autocomplete="off"/>
+    <ul id="list">
+        <li><a href="javascript:;">《第七个读者》</a></li>
+        <li><a href="javascript:;">《 心理罪 画像》</a></li>
+        <li><a href="javascript:;">《 心理罪 教化场》</a></li>
+        <li><a href="javascript:;">《 心理罪 暗河》</a></li>
+        <li><a href="javascript:;">《 心理罪 城市之光》</a></li>
+        <li><a href="javascript:;">《地球往事》</a></li>
+        <li><a href="javascript:;">《黑暗森林》</a></li>
+        <li><a href="javascript:;">《死神永生》</a></li>
+        <li><a href="javascript:;">《乡村教师》</a></li>
+        <li><a href="javascript:;">《地球大炮》</a></li>
+    </ul>
+</div>
+<script>
+	const s=document.querySelector('#s'),
+		ul=document.querySelector('#list'),
+		list=Array.from(ul.querySelectorAll('li'));
+	s.onfocus=function () {
+		ul.style.display='block';	
+	}
+
+	let index=-1,arr=[];
+	list.forEach(e => {
+		e.onclick=check;
+		e.onkeydown=function () {
+			return false;           //阻止enter触发onclick
+		}
+		e.onmouseover=function () {
+			if (list[index]) list[index].classList.remove('hover');
+			index=-1;
+		}
+	})
+	document.onkeydown=function (ev) {
+		if(ev.keyCode==40) {
+			if (list[index]) list[index].classList.remove('hover');
+			if (index==list.length-1) index=-1;
+			list[++index].classList.add('hover');
+		} 
+		if(ev.keyCode==38) {
+			if (list[index]) list[index--].classList.remove('hover');
+			if (index<0) index=list.length-1;
+			list[index].classList.add('hover');
+		}
+		if (ev.keyCode==13 && list[index]) {
+			check(ev,list[index]);
+		}
+	}
+
+	function check(ev,obj=this) {
+		if (ev.ctrlKey) {
+			if (obj.className.indexOf('select')!=-1) {
+				obj.classList.remove('select');
+				arr.splice(arr.indexOf(obj.innerText),1);
+			}else{
+				obj.classList.add('select');
+				arr.push(obj.innerText);
+			}
+			s.value=arr.join('');
+		}else{
+			s.value=obj.innerText;
+			arr=[];
+			list.forEach(e=>{
+				e.classList.remove('select');
+			})
+		} 
+	}
+</script>
+</body>
+</html>

@@ -36,10 +36,12 @@
             if(obj[37]){
                 div.style.left = div.offsetLeft - 5 +'px';
             }
+            console.log(timer)
         },10);
     }  
     document.onkeyup = function(ev){
         obj[ev.keyCode]=false;
+        clearInterval(timer);
     }
 </script>
 </body>

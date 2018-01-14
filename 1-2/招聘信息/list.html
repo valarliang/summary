@@ -230,7 +230,7 @@
 				right.innerHTML=str;
 				const lis=Array.from(right.querySelectorAll('li'));
 				lis.forEach((e,i) => e.onclick=function () {
-					window.location.hash=`lx=${name},num=${(page-1)*max+i}`;
+					window.location.hash=`lx=${name},num=${(page-1)*max+i},page=${page}`;
 
 				})
 			}
@@ -264,11 +264,9 @@
 					window.location.href=window.location.href.split('list.html').join('content.html');
 				}
 			}
-
-			window.location.hash=`lx=${data.list[0].lx},page=1`;
+			if (window.location.hash.indexOf('#')==-1) window.location.hash=`lx=${data.list[0].lx},page=1`;
 			hashChanged();
 			window.onhashchange=hashChanged;
-				
 		</script>
 	</body>
 </html>
