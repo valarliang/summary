@@ -1,0 +1,308 @@
+/*
+body,html{
+  width: 100%;
+  height: 100%;
+}
+body{
+  padding: 0px;
+  margin: 0px;
+  color: white;
+  font-family: 'Lucida Grande', Verdana, Arial;
+  font-size: 12px;
+  background: url('../imagse/bg6.png') no-repeat;
+  background-size: 100% 100%;
+}
+*/
+#waiceng{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+}
+#container {
+  z-index: 9;
+  perspective:800px;
+  -o-perspective:800px;
+  -moz-perspective:800px;
+  -webkit-perspective: 800px;
+  perspective-origin:50% 225px;
+  -webkit-perspective-origin: 50% 225px;
+  -o-perspective-origin:50% 225px;
+  -moz-perspective-origin:50% 225px;
+}
+#stage {
+  width: 100%;
+  height: 100%;
+  transition: -webkit-transform 2s;
+  -webkit-transition: -webkit-transform 2s;
+  -o-transition: -webkit-transform 2s;
+  -moz-transition: -webkit-transform 2s;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+}
+#shape {
+  position: relative;
+  top: 160px;
+  margin: 0 auto;
+  height: 200px;
+  width: 200px;
+  -webkit-transform: translateZ(0px);
+  transform: translateZ(0px);
+  -o-transform: translateZ(0px);
+  -moz-transition: translateZ(0px);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+}
+.plane {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  border: 1px solid white;
+  -webkit-border-radius: 12px;
+  -webkit-box-sizing: border-box;
+  text-align: center;
+  font-family: Times, serif;
+  font-size: 124pt;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.6);
+  -webkit-transition: -webkit-transform 2s, opacity 2s;
+  transition: -webkit-transform 2s, opacity 2s;
+  -o-transition: -o-transform 2s, opacity 2s;
+  -moz-transition: -moz-transform 2s, opacity 2s;
+  -webkit-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  box-shadow:0px 0px 8px #fff;
+}
+.plane img{
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 12px;
+}
+#shape.backfaces .plane {
+  -webkit-backface-visibility: visible;
+  -o-backface-visibility: visible;
+  -moz-backface-visibility: visible;
+  backface-visibility: visible;
+}
+/*  #shape {
+ 点击键盘时间的transition
+ -webkit-transition: -webkit-transform 1s;
+ transition: transform 1s;
+ -o-transition: -o-transform 1s;
+ -moz-transition: -moz-transform 1s;
+}  */
+.shapeAim{
+  -webkit-animation: spin 20s infinite linear;
+  -o-animation: spin 20s infinite linear;
+  -moz-animation: spin 20s infinite linear;
+  animation: spin 20s infinite linear;
+}
+
+
+
+@-webkit-keyframes spin {
+  from { -webkit-transform: rotateY(0deg); }
+  to   { -webkit-transform: rotateY(-360deg); }
+}
+@-moz-keyframes spin {
+  from { -moz-transform: rotateY(0deg); }
+  to   { -moz-transform: rotateY(-360deg); }
+}
+@-o-keyframes spin {
+  from { -o-transform: rotateY(0deg); }
+  to   { -o-transform: rotateY(-360deg); }
+}
+@keyframes spin {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(-360deg); }
+}
+
+
+/* ---------- cube 样式------------- */
+.cube > .one{
+  opacity:.4;
+  -webkit-transform: scale3d(1.2, 1.2, 1.2) translateZ(100px);
+  -o-transform: scale3d(1.2, 1.2, 1.2) translateZ(100px);
+  -moz-transform: scale3d(1.2, 1.2, 1.2) translateZ(100px);
+  transform: scale3d(1.2, 1.2, 1.2) translateZ(100px);
+}
+.cube > .two {
+  opacity:.4;
+  -webkit-transform: scale3d(1.2, 1.2, 1.2) rotateX(90deg) translateZ(100px);
+  -o-transform: scale3d(1.2, 1.2, 1.2) rotateX(90deg) translateZ(100px);
+  -moz-transform: scale3d(1.2, 1.2, 1.2) rotateX(90deg) translateZ(100px);
+  transform: scale3d(1.2, 1.2, 1.2) rotateX(90deg) translateZ(100px);
+}
+.cube > .three{
+  opacity:.4;
+  -webkit-transform: scale3d(1.2, 1.2, 1.2) rotateY(-180deg) translateZ(100px) rotateZ(360deg);
+  -o-transform: scale3d(1.2, 1.2, 1.2) rotateY(-180deg) translateZ(100px) rotateZ(360deg);
+  -moz-transform: scale3d(1.2, 1.2, 1.2) rotateY(-180deg) translateZ(100px) rotateZ(360deg);
+  transform: scale3d(1.2, 1.2, 1.2) rotateY(-180deg) translateZ(100px) rotateZ(360deg);
+}
+.cube > .four{
+  opacity:.4;
+  -webkit-transform: scale3d(1.2,1.2,1.2) rotateX(-90deg) translateZ(100px);
+  -o-transform: scale3d(1.2,1.2,1.2) rotateX(-90deg) translateZ(100px);
+  -moz-transform: scale3d(1.2,1.2,1.2) rotateX(-90deg) translateZ(100px);
+  transform: scale3d(1.2,1.2,1.2) rotateX(-90deg) translateZ(100px);
+}
+.cube > .five{
+  opacity:.4;
+  -webkit-transform: scale3d(1.2,1.2,1.2) rotateY(90deg) translateZ(100px);
+  -o-transform: scale3d(1.2,1.2,1.2) rotateY(90deg) translateZ(100px);
+  -moz-transform: scale3d(1.2,1.2,1.2) rotateY(90deg) translateZ(100px);
+  transform: scale3d(1.2,1.2,1.2) rotateY(90deg) translateZ(100px);
+}
+.cube > .six{
+  opacity:.4;
+  -webkit-transform: scale3d(1.2,1.2,1.2) rotateY(-90deg) translateZ(100px);
+  -o-transform: scale3d(1.2,1.2,1.2) rotateY(-90deg) translateZ(100px);
+  -moz-transform: scale3d(1.2,1.2,1.2) rotateY(-90deg) translateZ(100px);
+  transform: scale3d(1.2,1.2,1.2) rotateY(-90deg) translateZ(100px);
+}
+.cube > .seven {
+  -webkit-transform: scale3d(0.8,0.8,0.8) translateZ(100px);
+  -o-transform: scale3d(0.8,0.8,0.8) translateZ(100px);
+  -moz-transform: scale3d(0.8,0.8,0.8) translateZ(100px);
+  transform: scale3d(0.8,0.8,0.8) translateZ(100px);
+}
+.cube > .eight {
+  -webkit-transform: scale3d(0.8,0.8,0.8) rotateX(90deg) translateZ(100px);
+  -o-transform: scale3d(0.8,0.8,0.8) rotateX(90deg) translateZ(100px);
+  -moz-transform: scale3d(0.8,0.8,0.8) rotateX(90deg) translateZ(100px);
+  transform: scale3d(0.8,0.8,0.8) rotateX(90deg) translateZ(100px);
+}
+.cube > .eleven {
+  -webkit-transform: scale3d(0.8,0.8,0.8) rotateY(90deg) translateZ(100px);
+  -o-transform: scale3d(0.8,0.8,0.8) rotateY(90deg) translateZ(100px);
+  -moz-transform: scale3d(0.8,0.8,0.8) rotateY(90deg) translateZ(100px);
+  transform: scale3d(0.8,0.8,0.8) rotateY(90deg) translateZ(100px);
+}
+.cube > .nine {
+  -webkit-transform: scale3d(0.8,0.8,0.8) rotateY(-180deg) translateZ(100px) rotateZ(360deg);
+  -o-transform: scale3d(0.8,0.8,0.8) rotateY(-180deg) translateZ(100px) rotateZ(360deg);
+  -moz-transform: scale3d(0.8,0.8,0.8) rotateY(-180deg) translateZ(100px) rotateZ(360deg);
+  transform: scale3d(0.8,0.8,0.8) rotateY(-180deg) translateZ(100px) rotateZ(360deg);
+}
+.cube > .ten {
+  -webkit-transform: scale3d(0.8,0.8,0.8) rotateX(-90deg) translateZ(100px);
+  -o-transform: scale3d(0.8,0.8,0.8) rotateX(-90deg) translateZ(100px);
+  -moz-transform: scale3d(0.8,0.8,0.8) rotateX(-90deg) translateZ(100px);
+  transform: scale3d(0.8,0.8,0.8) rotateX(-90deg) translateZ(100px);
+}
+.cube > .twelve {
+  -webkit-transform: scale3d(0.8,0.8,0.8) rotateY(-90deg) translateZ(100px);
+  -o-transform: scale3d(0.8,0.8,0.8) rotateY(-90deg) translateZ(100px);
+  -moz-transform: scale3d(0.8,0.8,0.8) rotateY(-90deg) translateZ(100px);
+  transform: scale3d(0.8,0.8,0.8) rotateY(-90deg) translateZ(100px);
+}
+/* ---------- ring 样式 ------------- */
+.ring > .one {
+  -webkit-transform: translateZ(380px);
+  -o-transform: translateZ(380px);
+  -moz-transform: translateZ(380px);
+  transform: translateZ(380px);
+}
+.ring > .two {
+  -webkit-transform: rotateY(30deg) translateZ(380px);
+  -o-transform: rotateY(30deg) translateZ(380px);
+  -moz-transform: rotateY(30deg) translateZ(380px);
+  transform: rotateY(30deg) translateZ(380px);
+}
+.ring > .three {
+  -webkit-transform: rotateY(60deg) translateZ(380px);
+  -o-transform: rotateY(60deg) translateZ(380px);
+  -moz-transform: rotateY(60deg) translateZ(380px);
+  transform: rotateY(60deg) translateZ(380px);
+}
+.ring > .four {
+  -webkit-transform: rotateY(90deg) translateZ(380px);
+  -o-transform: rotateY(90deg) translateZ(380px);
+  -moz-transform: rotateY(90deg) translateZ(380px);
+  transform: rotateY(90deg) translateZ(380px);
+}
+.ring > .five {
+  -webkit-transform: rotateY(120deg) translateZ(380px);
+  -o-transform: rotateY(120deg) translateZ(380px);
+  -moz-transform: rotateY(120deg) translateZ(380px);
+  transform: rotateY(120deg) translateZ(380px);
+}
+.ring > .six {
+  -webkit-transform: rotateY(150deg) translateZ(380px);
+  -o-transform: rotateY(150deg) translateZ(380px);
+  -moz-transform: rotateY(150deg) translateZ(380px);
+  transform: rotateY(150deg) translateZ(380px);
+}
+.ring > .seven {
+  -webkit-transform: rotateY(180deg) translateZ(380px);
+  -o-transform: rotateY(180deg) translateZ(380px);
+  -moz-transform: rotateY(180deg) translateZ(380px);
+  transform: rotateY(180deg) translateZ(380px);
+}
+.ring > .eight {
+  -webkit-transform: rotateY(210deg) translateZ(380px);
+  -o-transform: rotateY(210deg) translateZ(380px);
+  -moz-transform: rotateY(210deg) translateZ(380px);
+  transform: rotateY(210deg) translateZ(380px);
+}
+.ring > .nine {
+  -webkit-transform: rotateY(-120deg) translateZ(380px);
+  -o-transform: rotateY(-120deg) translateZ(380px);
+  -moz-transform: rotateY(-120deg) translateZ(380px);
+  transform: rotateY(-120deg) translateZ(380px);
+}
+.ring > .ten {
+  -webkit-transform: rotateY(-90deg) translateZ(380px);
+  -o-transform: rotateY(-90deg) translateZ(380px);
+  -moz-transform: rotateY(-90deg) translateZ(380px);
+  transform: rotateY(-90deg) translateZ(380px);
+}
+.ring > .eleven {
+  -webkit-transform: rotateY(300deg) translateZ(380px);
+  -o-transform: rotateY(300deg) translateZ(380px);
+  -moz-transform: rotateY(300deg) translateZ(380px);
+  transform: rotateY(300deg) translateZ(380px);
+}
+.ring > .twelve {
+  -webkit-transform: rotateY(330deg) translateZ(380px);
+  -o-transform: rotateY(330deg) translateZ(380px);
+  -moz-transform: rotateY(330deg) translateZ(380px);
+  transform: rotateY(330deg) translateZ(380px);
+}
+
+/*底部*/
+#box{
+    /*width: 100%;*/
+    position: absolute;
+    bottom: 3%;
+    text-align: center;
+    transform-style:preserve-3d;
+}
+#box img{
+    width: 60px;
+    height: 60px;
+    border-radius: 90%;
+    position: relative;
+    top:150px;
+    border: 1px solid white;
+    box-shadow: 0 5px 10px #000;
+    cursor: pointer;
+}
+
+/*change*/
+/*
+.changeBox{
+  width: 260px;
+  height: 280px;
+  position: absolute;
+  top: -40px;
+  left: -30px;
+}
+*/
