@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#div{
+    width:100px;
+    height: 100px;
+    position: absolute;
+    left:0;
+    top:0;
+    background:red;
+}
+</style>
+</head>
+<body>
+    <div id="div"></div>
+<script>
+    const div = document.getElementById('div');
+    let timer = null,obj={37:false,38:false,39:false,40:false};
+
+    document.onkeydown = function (ev){
+        obj[ev.keyCode]=true;
+        clearInterval(timer);
+        timer = setInterval(function(){
+            if(obj[39]){
+                div.style.left = div.offsetLeft + 5 +'px';
+            }
+            if(obj[40]){
+                div.style.top = div.offsetTop + 5 +'px';
+            }
+            if(obj[38]){
+                div.style.top = div.offsetTop - 5 +'px';
+            }
+            if(obj[37]){
+                div.style.left = div.offsetLeft - 5 +'px';
+            }
+            console.log(timer)
+        },10);
+    }  
+    document.onkeyup = function(ev){
+        obj[ev.keyCode]=false;
+        clearInterval(timer);
+    }
+</script>
+</body>
+</html>

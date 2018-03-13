@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>1</title>
+</head>
+<style>
+	*{margin: 0;padding: 0;}
+	p{font:bold 25px 'Microsoft';margin: 20px;}
+	#trigger{background-color: red;display: inline-block;width: 100px;height: 40px;color: white;}
+	#preview{width:100px;height: 100px;margin: 20px;border: 4px solid black;background-color: white;}
+	#mask{position: fixed;left:0;top: 0;bottom: 0;right: 0;background-color: rgba(0,0,0,.5);}
+	#popup{position: fixed;left: 50%;top: 50%;transform: translate(-50%,-50%);padding: 15px; border: 15px solid darkgray;background-color: white;}
+	li{list-style: none;font: 15px 'Microsoft';margin:0 15px 10px;text-align: center;}
+	#popup div{display: inline-block;width: 30px;height: 30px;background-color: whitesmoke;border: 1px solid gainsboro;line-height: 30px;font-size: 10px;}
+	#popup div:hover{background-color: goldenrod;}
+	#popup input{background-color: midnightblue;display: inline-block;width: 60px;height: 30px;color: white;border-style: none;}
+</style>
+<body>
+	<p>请为下面的DIV设置样式：<input id="trigger" type="button" value="点击设置"></p>
+	<div id="preview"></div>
+	<div id="mask" style="display:none;">
+		<div id="popup">
+			<ul>
+				<li>
+					请选择背景颜色：
+					<div id="red" style="background-color: yellowgreen;color: white;">红</div>
+					<div id="yellow" style="background-color: gold;color: white;">黄</div>
+					<div id="blue" style="background-color: cornflowerblue;color: white;">蓝</div>
+				</li>
+				<li>
+					请选择宽（px）：
+					<div id="width2">200</div>
+					<div id="width3">300</div>
+					<div id="width4">400</div>
+				</li>
+				<li>
+					请选择高（px）：
+					<div id="height2">200</div>
+					<div id="height3">300</div>
+					<div id="height4">400</div>
+				</li>
+				<li>
+				<input id="reset" type="button" value="恢复">
+				<input id="submit" type="button" value="确定">
+				</li>
+			</ul>
+		</div>
+	</div>
+	<script>
+		var tButton=document.getElementById('trigger');
+		var preview=document.getElementById('preview');
+		var mask=document.getElementById('mask');
+		var redButton=document.getElementById('red');
+		var yellowButton=document.getElementById('yellow');
+		var blueButton=document.getElementById('blue');
+		var width2=document.getElementById('width2');
+		var width3=document.getElementById('width3');
+		var width4=document.getElementById('width4');
+		var height2=document.getElementById('height2');
+		var height3=document.getElementById('height3');
+		var height4=document.getElementById('height4');
+		var reset=document.getElementById('reset');
+		var submit=document.getElementById('submit');
+		tButton.onclick=function () {
+			mask.style.display='block';
+		}
+		redButton.onmouseover=function () {
+			redButton.style.backgroundColor='red';
+		}
+		redButton.onmouseout=function () {
+			redButton.style.backgroundColor='yellowgreen';
+		}
+		yellowButton.onmouseover=function () {
+			yellowButton.style.backgroundColor='yellow';
+		}
+		yellowButton.onmouseout=function () {
+			yellowButton.style.backgroundColor='gold';
+		}
+		blueButton.onmouseover=function () {
+			blueButton.style.backgroundColor='blue';
+		}
+		blueButton.onmouseout=function () {
+			blueButton.style.backgroundColor='cornflowerblue';
+		}
+		redButton.onclick=function () {
+			preview.style.backgroundColor='red';
+		}
+		yellowButton.onclick=function () {
+			preview.style.backgroundColor='yellow';
+		}
+		blueButton.onclick=function () {
+			preview.style.backgroundColor='blue';
+		}
+		width2.onclick=function () {
+			preview.style.width='200px';
+		}
+		width3.onclick=function () {
+			preview.style.width='300px';
+		}
+		width4.onclick=function () {
+			preview.style.width='400px';
+		}
+		height2.onclick=function () {
+			preview.style.height='200px';
+		}
+		height3.onclick=function () {
+			preview.style.height='300px';
+		}
+		height4.onclick=function () {
+			preview.style.height='400px';
+		}
+		reset.onclick=function () {
+			preview.removeAttribute('style');
+		}
+		submit.onclick=function () {
+			mask.style.display='none';
+		}
+	</script>
+</body>
+</html>

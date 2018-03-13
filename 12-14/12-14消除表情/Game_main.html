@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Game_main</title>
+<link rel="stylesheet" href="style/Game_main.css">
+</head>
+<body>
+<div id="wrap">
+	<div class="head">
+		<div id="log"></div>
+		<h3 class="title">你的鼠标有多快?</h3>
+		<p class="explain">游戏说明：“点击游戏”，随机掉下表情点中它，千万别让它掉下去！！</p>
+	</div>
+	<div class="win">
+		<span class="winNum">0分</span>
+		<p>得分</p>
+	</div>
+	<div class="lose">
+		<span class="loseNum">0分</span>
+		<p>失分</p>
+	</div>
+	<div class="content">
+		<a href="javascript:;" class="btn">开始游戏</a>
+		<img src="img/demonI.png">
+	</div>
+</div>
+<script src="tween.js"></script>
+<script>
+	const content=document.querySelector('.content'),
+		btn=content.querySelector('.btn'),
+		win=document.querySelector('.win'),
+		lose=document.querySelector('.lose'),
+		winNum=win.querySelector('.winNum'),
+		loseNum=lose.querySelector('.loseNum'),
+		img=content.querySelector('img');
+	let icon1=['img/demonI.png','img/demonII.png','img/demonIII.png'],
+		icon2=['img/demonIV.png','img/demonV.png','img/demonVI.png'];
+	let flag=0;
+	btn.onclick=function () {
+		if (flag) return;
+		flag=1;
+		img.style.top='-54px';
+		move({obj:this,attrs:{opacity:0},d:600,cb:function () {
+			btn.style.display='none';
+			flag=0;
+		}});
+		move({obj:win,attrs:{left:50},d:400,fx:'easeOut'});
+		setTimeout(function () {
+			move({obj:lose,attrs:{left:50},d:400,fx:'easeOut'});
+		},150);
+		drop(3000);
+	}
+
+	function drop(duration) {
+		img.src=icon1[Math.ceil(Math.random()*3)-1];
+		img.style.left=Math.random()*620+'px';
+		move({obj:img,attrs:{top:402},d:duration,cb:function () {
+			shake({obj:content,attr:'top',n:14});
+			reDrop(loseNum,duration);
+		}});
+		let flag=1;
+		img.onmousedown=function () {
+			if (flag) {
+				clearInterval(this.timer);
+				img.src=icon2[Math.ceil(Math.random()*3)-1];
+				shake({obj:this,callback:function () {
+					reDrop(winNum,duration-=150);
+				}});
+				flag=0;
+			}
+		}
+	}
+	function reDrop(objnum,duration) {
+		img.removeAttribute('style');
+		let n=parseInt(objnum.innerText);
+		objnum.innerText=(++n)+'分';
+		if (n==10 && objnum==loseNum) {
+			btn.style.display='block';
+			flag=1;
+			move({obj:btn,attrs:{opacity:1},d:1000});
+			move({obj:win,attrs:{left:180},d:2000,cb:function () {
+				loseNum.innerText=winNum.innerText='0分';
+				flag=0;
+			}});
+			move({obj:lose,attrs:{left:180},d:2000});
+			return;
+		} 
+		drop(duration);
+	}
+</script>
+</body>
+</html>
+<!-- 
+需求:
+1,点击开始btn,游戏开始
+2,表情随机往下落  Math.ceil()向上取整,Math.random()随机数,setInterval(),clearInterval(),
+3,点击表情左右抖动消失得分+1/没点中下落后窗口上下抖动失分+1,失分积满10分则游戏失败!!!
+ -->

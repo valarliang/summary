@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <div id="app">
+        <section class="todoapp">
+            <div>
+                <header class="header" >
+                    <h1>todos</h1>
+                    <input 
+                        class="new-todo" 
+                        placeholder="请输入内容" 
+                        v-model="txt"
+                        @keyup.13="up"
+                    >
+                </header>
+                <section class="main">
+                    <input 
+                        class="toggle-all" 
+                        type="checkbox" 
+                        :checked="listenArr"
+                        @click="click"
+                    >
+                    <ul class="todo-list">
+                        <li 
+                            :class="(val.checked?'completed':'')+val.edit" 
+                            v-for="(val,key) in arr">
+                            <div class="view" >
+                                <input 
+                                    class="toggle" 
+                                    type="checkbox" 
+                                    v-model="val.checked">
+                                <label
+                                    @dblclick="dbclick(val,$event)"
+                                >{{val.txt}}</label>
+                                <button 
+                                    class="destroy"
+                                    @click="remove(val)"
+                                ></button>
+                            </div>
+                            <input 
+                                class="edit"
+                                @blur="blur(val,$event)"
+                                @keyup.13="blur(val,$event)"
+                                @keyup.esc="(val.edit='')"
+                                :value="val.txt">
+                        </li>
+                    </ul>
+                </section>
+                <footer class="footer">
+                    <span class="todo-count">
+                        <strong>{{checkedNum}}</strong>
+                        <span>条未选中</span>
+                    </span>
+                    <ul className="filters">
+                        <li>
+                            <a href="#/all"
+                                @click=""
+                                class=""
+                            >全部</a>
+                        </li>
+                        <li>
+                            <a href="#/active"
+                                @click=""
+                                class=""
+                            >未完成</a>
+                        </li>
+                        <li>
+                            <a href="#/completed"
+                                @click=""
+                                class=""
+                            >已完成</a>
+                        </li>
+                    </ul>
+                    <button className="clear-completed" onClick={this.clean}>清除完成项</button>
+                </footer>
+            </div>
+        </section>
+    </div>
+<script src="../vue.js" charset="utf-8"></script>
+<script>
+
+    /*
+        computed:{
+            监听的函数名:function(){
+                return 监听的数据的处理
+            }
+        }
+        当某个数据发生变化的时候就会触发
+
+
+    */
+
+    new Vue({
+        el:'#app',
+        data:{
+            txt:'',
+            modifyText:'',
+            arr:[
+                {
+                    id:0,
+                    txt:'呵呵',
+                    checked:false,
+                    edit:'',
+                },
+                {
+                    id:1,
+                    txt:'呵哒',
+                    checked:true,
+                    edit:'',
+                }
+            ],
+        },
+        methods:{
+            up(){
+                if (this.txt.trim()) {
+                    this.arr.unshift({
+                        id:new Date().getTime(),
+                        txt: this.txt,
+                        checked:false 
+                    })
+                }
+                this.txt = '';
+            },
+            click(ev){
+                let {checked} = ev.target;
+               
+                this.arr.forEach(e=>{
+                    e.checked = checked
+                })
+            },
+            remove(val){
+                this.arr=this.arr.filter(e=>e.id!=val.id)
+            },
+            dbclick(val,ev){
+                val.edit=" editing";
+                this.$nextTick(()=>{
+                    ev.target.parentNode.nextElementSibling.focus();
+                })
+            },
+            blur(val,ev){
+                let input=ev.target.value.trim();
+                if (input) val.txt=input;
+                val.edit="";
+            }
+        },
+        computed:{
+            listenArr(){
+                return this.arr.length? this.arr.every(e=>e.checked):false
+            },
+            listenVal(){
+                return  this.txt.replace(/\d+/g,'');
+            },
+            checkedNum(){
+                return this.arr.filter(e=>!e.checked).length;
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

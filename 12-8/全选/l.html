@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0}
+		ul{list-style: none;}
+		body{
+			width: 100%;
+			background: radial-gradient(at 50% 0,#c55478,#1e1e2a) no-repeat;
+		}
+		.regular-checkbox {
+			/*display: none;*/
+		}
+		.regular-checkbox + label {
+			border: 1px solid #9C9C9C;
+			padding: 7px;
+			font-size: 14px;
+			display: inline-block;
+			position: relative;
+			top: 2px;
+			left: 34px;
+		}
+		.regular-checkbox:checked + label:after {
+			content: '\2714';
+			position: absolute;
+			top: -16px;
+			left: 0;
+			color: black;
+			font-size: 18px;
+		}
+		#wrap{
+			width: 600px;
+			border-radius: 8px;
+			padding-top: 20px;
+			margin: 100px auto;
+			background: white;
+		}
+		#list{
+			padding-bottom: 20px;
+		}
+		#list li{
+			height: 46px;
+			font: bold 14px/46px 'Microsoft';
+			position: relative;
+		}
+		#list li:hover{
+			background: #e4667d!important;
+		}
+		#list li:nth-of-type(odd){
+			background: white;
+		}
+		#list li:nth-of-type(even){
+			background: #f7c5ce;
+		}
+		.name{
+			position: absolute;
+			left: 70px;
+		}
+		.artist{
+			position: absolute;
+			right: 34px;
+		}
+		#footer{
+			height: 56px;
+			background: #de4a63;
+			border-radius: 0 0 8px 8px;
+			color: white;
+		}
+		#footer li{
+			display: inline-block;
+			font: 18px/56px 'Microsoft';
+			margin: 0 50px;
+		}
+		#footer li:first-of-type{
+			display: inline-block;
+			font: 18px/56px 'Microsoft';
+			margin: 0;
+			position: relative;
+		}
+		#checkbox:checked + label:after{
+			top: -20px;
+		}
+	</style>
+</head>
+<body>
+<div id="wrap">
+	<ul id="list">
+		<li>
+			<input type="checkbox" id="checkbox0" class="regular-checkbox"><label for="checkbox0"></label>
+			<span class="name">泡沫</span>
+			<span class="artist">邓紫棋</span>
+		</li>
+		<li>
+			<input type="checkbox" id="checkbox1" class="regular-checkbox"><label for="checkbox1"></label>
+			<span class="name">说爱你</span>
+			<span class="artist">蔡依林</span>
+		</li>
+		<li>
+			<input type="checkbox" id="checkbox2" class="regular-checkbox"><label for="checkbox2"></label>
+			<span class="name">稻香</span>
+			<span class="artist">周杰伦</span>
+		</li>
+		<li>
+			<input type="checkbox" id="checkbox3" class="regular-checkbox"><label for="checkbox3"></label>
+			<span class="name">我的梦</span>
+			<span class="artist">张靓颖</span>
+		</li>
+		<li>
+			<input type="checkbox" id="checkbox4" class="regular-checkbox"><label for="checkbox4"></label>
+			<span class="name">怎么说我不爱你</span>
+			<span class="artist">萧敬腾</span>
+		</li>
+		<li>
+			<input type="checkbox" id="checkbox5" class="regular-checkbox"><label for="checkbox5"></label>
+			<span class="name">无处安放</span>
+			<span class="artist">白若溪</span>
+		</li>
+	</ul>
+	<ul id="footer">
+		<li>
+			<input type="checkbox" id="checkbox" class="regular-checkbox"><label for="checkbox"></label>
+		</li>
+		<li>全选</li>
+		<li>收藏</li>
+		<li>添加</li>
+		<li>删除</li>
+	</ul>
+</div>
+<script>
+	const list=document.querySelector('#list'),
+		lis=Array.from(list.querySelectorAll('li')),
+		checkboxCtrl=document.querySelector('#footer input'),
+		listCtrl=document.querySelectorAll('#footer li')[1];
+
+	let arr=new Array(lis.length);
+	arr.fill(false);
+	listCtrl.onclick=function () {
+		if (checkboxCtrl.checked) checkboxCtrl.removeAttribute('checkde');
+		else checkboxCtrl.setAttribute('checked',1);
+		console.log(checkboxCtrl.checked);
+		arr.fill(checkboxCtrl.checked);
+		lis.forEach(function (e,i) {
+			const checkboxs=e.querySelector('input');
+			checkboxs.checked=arr[i];
+		})
+	}
+	lis.forEach(function (e,i) {
+		e.onclick=function () {
+			arr[i]=!arr[i];
+			const checkboxs=this.querySelector('input');
+			checkboxs.checked=arr[i];
+			checkboxCtrl.checked=arr.every(function (e) {
+				return e;
+			})
+		}
+	})
+</script>
+</body>
+</html>

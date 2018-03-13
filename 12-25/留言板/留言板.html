@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/clear.css">
+</head>
+<body>
+<section id="wrap">
+	<div id="content">
+		<h2 class="logo"><img src="img/log.png"></h2>
+		<div class="clearfix">
+			<textarea class="message"></textarea>
+			<input type="button" value="提交" class="btn">
+		</div>
+		<ul id="mList">
+			<li class="mText clearfix">
+				<span class="mIcon1"></span>
+				<p class="mComtent">你好!</p>
+			</li>
+			<li class="mText clearfix">
+				<span class="mIcon1 mIcon2"></span>
+				<p class="mComtent">你好!</p>
+			</li>
+		</ul>
+	</div>
+</section>
+<script>
+	const btn=document.querySelector('.btn'),
+		text=document.querySelector('.message'),
+		list=document.querySelector('#mList');
+	let flag=0;
+	btn.onclick=function () {
+		if (!text.value) alert('请输入留言!');
+		else{
+			const li=document.createElement('li'),
+				span=document.createElement('span'),
+				p=document.createElement('p'),
+				firstli=list.getElementsByTagName('li')[0];
+			li.className='mText clearfix';
+			span.className='mIcon1 mIcon2';
+			if (flag) span.className='mIcon1';
+			flag=!flag;
+			p.className='mComtent';
+			p.innerText=text.value;
+			list.insertBefore(li,firstli);
+			li.appendChild(span);
+			li.appendChild(p);
+			text.value='';
+		}
+	}
+</script>
+</body>
+</html>

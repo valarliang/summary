@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{
+			width: 50px;
+			height: 50px;
+			position: absolute;
+		}
+		#box1{
+			background: blue;
+		}
+		#box2{
+			top:100px;
+			background: yellow;
+		}
+	</style>
+</head>
+<body>
+	<div id="box1"></div>
+	<div id="box2"></div>
+<script>
+	function Drag1(id) {
+		this.target=document.getElementById(id);
+		this.flag=false;
+	}
+	Drag1.prototype={
+		init(){
+			let that=this;
+			this.target.addEventListener('mousedown',function (ev) {
+				ev.preventDefault();
+				that.flag=true;
+				that.disL=ev.pageX-this.offsetLeft;
+				that.disT=ev.pageY-this.offsetTop;
+				that.move();
+				that.up();
+			})
+		},
+		move () {
+			let that=this;
+			document.addEventListener('mousemove',function (ev) {
+				if (that.flag) {
+					that.target.style.left=ev.pageX-that.disL+'px';
+					that.target.style.top=ev.pageY-that.disT+'px';
+				}
+			});
+		},
+		up(){
+			let that=this;
+			document.addEventListener('mouseup',function () {
+				that.flag=false;
+			});
+		}
+	}
+	
+	function Drag2(id) {
+		this.target=document.getElementById(id);
+		this.disL=0;
+		this.disT=0;
+	}
+	Drag2.prototype={
+		init(){
+			let that=this;
+			this.target.addEventListener('mousedown',function (ev) {
+				ev.preventDefault();
+				that.disL=ev.pageX-this.offsetLeft;
+				that.disT=ev.pageY-this.offsetTop;
+				document.addEventListener('mousemove',move);
+				document.addEventListener('mouseup',up);
+				
+				function move(ev) {
+					that.move(ev);
+				}
+				function up() {
+					that.up(move,up);
+				}
+			})
+		},
+		move(ev){
+			this.target.style.left=ev.pageX-this.disL+'px';
+			this.target.style.top=ev.pageY-this.disT+'px';
+		},
+		up(move,up){
+			document.removeEventListener('mousemove',move);
+			document.removeEventListener('mouseup',up);
+		}
+	}
+
+	function Drag3(id) {
+		Drag2.call(this,id);
+	}
+	function shim() {}
+	shim.prototype=Drag2.prototype;
+	let drag3Pro=new shim;
+	Drag3.prototype=drag3Pro;
+	Drag3.prototype.move=function (ev) {
+		let l=ev.pageX-this.disL,
+			t=ev.pageY-this.disT,
+			maxl=window.innerWidth-this.target.offsetWidth,
+			maxt=window.innerHeight-this.target.offsetHeight;
+		if (l<0) l=0;
+		if (l>maxl) l=maxl;
+		if (t<0) t=0;
+		if (t>maxt) t=maxt;
+		this.target.style.left=l+'px';
+		this.target.style.top=t+'px';
+	}
+
+	let a=new Drag2('box1');
+	a.init();
+	let b=new Drag3('box2');
+	b.init();
+</script>
+</body>
+</html>

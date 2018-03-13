@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<section class="wrap">
+	<div class="wrap-left">
+		<ul class="list">
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>AJAX</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>JS基础-2</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>移动端实战</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>canvas游戏</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="wrap-right">
+		<ul class="list">
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>小程序</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>面向对象-上</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>面向对象-下</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</section>
+<script src="tween.js"></script>
+<script>
+	const up=Array.from(document.querySelectorAll('.up')),
+		down=Array.from(document.querySelectorAll('.down'));
+	up.forEach(function (e) {
+		e.onclick=function () {
+			let el=this.parentNode.parentNode;
+			if (!el.previousElementSibling) {
+				let arr=Array.from(el.parentNode.children);
+				arr.shift();
+				arr.forEach(function (e) {
+					move({obj:e,attrs:{top:-62},d:400,cb:function () {
+						e.style.top=0;
+					}});
+				})
+				move({obj:el,attrs:{top:62*4},d:400,cb:function () {
+					el.parentNode.insertBefore(el,el.previousElementSibling);
+					el.style.top=0;	
+				}
+				});
+			}else{
+				move({obj:el.previousElementSibling,attrs:{top:62},d:400,cb:function () {
+					el.previousElementSibling.style.top=0;
+				}});
+				move({obj:el,attrs:{top:-62},d:400,cb:function () {
+					el.parentNode.insertBefore(el,el.previousElementSibling);
+					el.style.top=0;	
+				}
+				});
+			}
+		}
+	})
+	down.forEach(function (e) {
+		e.onclick=function () {
+			let el=this.parentNode.parentNode;
+			if (!el.nextElementSibling) {
+				let arr=Array.from(el.parentNode.children);
+				arr.pop();
+				arr.forEach(function (e) {
+					move({obj:e,attrs:{top:62},d:400,cb:function () {
+						e.style.top=0;
+					}});
+				})
+				move({obj:el,attrs:{top:-62*4},d:400,cb:function () {
+					insertAfter(el,el.nextElementSibling);
+					el.style.top=0;	
+				}
+				});
+			}else{
+				move({obj:el.nextElementSibling,attrs:{top:-62},d:400,cb:function () {
+					el.nextElementSibling.style.top=0;
+				}});
+				move({obj:el,attrs:{top:62},d:400,cb:function () {
+					insertAfter(el,el.nextElementSibling);
+					el.style.top=0;	
+				}
+				});
+			}
+		}
+	})
+	function insertAfter(currentE,targetE) {
+	    let parent = currentE.parentNode;
+	    if (currentE==parent.lastElementChild) parent.insertBefore(currentE,parent.firstElementChild);
+	    else parent.insertBefore(currentE,targetE.nextSibling);
+	}
+</script>	
+</body>
+</html>

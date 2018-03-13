@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		ul{list-style: none;}
+		body{
+			background: #de4a64;
+		}
+		#list1{
+			width: 1000px;
+			margin: 100px auto 10px;
+			list-style: none;
+		}
+		#list1:after{
+			content: '';
+			display: block;
+			clear: both;
+		}
+		#list1 li{
+			width: 240px;
+			height: 440px;
+			float: left;
+			margin: 0 5px;
+			position: relative;
+		}
+		.mask{
+			width: 100%;
+			height: 100%;
+			display: none;
+			position: absolute;
+			top: 0;
+		}
+		.mask .gray{
+			width: 100%;
+			height: 100%;
+			transition: .7s;
+			position: absolute;
+		}
+		.mask .ico{
+			width: 140px;
+			height: 140px;
+			border: 4px solid #de4a64;
+			border-radius: 50%;
+			margin: 146px auto;
+			text-align: center;
+			font: bold 22px/140px 'Microsoft';
+			color: #de4a64;
+			transition: .3s;
+			transform: rotate(-30deg) scale(3);
+		}
+		#list1 header{
+			height: 40px;
+			background: black;
+		}
+		#list1 header input{
+			outline: none;
+			background: none;
+			border: none;
+			border-bottom: 1px solid #de4a64;
+			width: 160px;
+			margin: 10px 14px 10px 20px;
+			font: 14px/20px '微软雅黑';
+			color: #de4a64;
+		}
+		#list1 header button{
+			outline: none;
+			border: none;
+			background: none;
+			color: #de4a64;
+			cursor: pointer;
+		}
+		#list1 section{
+			background: white;
+			height: 374px;
+			text-align: center;
+			padding-top: 26px;
+		}
+		#list1 .head{
+			color: #7f7f7f;
+			font-size: 14px;
+		}
+		#list1 .head span{
+			display: inline-block;
+			width: 20px;
+			height: 28px;
+			border-radius: 4px;
+			background: #de4a64;
+			margin: 4px 2px;
+			color: white;
+			font: bold 16px/28px 'Microsoft';
+		}
+		#list1 section img{
+			margin: 20px 0 0;
+		}
+		#list1 section h2{
+			font: bold 14px/16px 'Microsoft';
+			padding-bottom: 20px
+		}
+		#list1 section strong{
+			color: #de4a64;
+			padding-left: 10px;
+		}
+		#list1 section .foot span{
+			font-weight: bold;
+			color: #7f7f7f;
+		}
+		.list{
+			width: 1000px;
+			margin: 0 auto;
+			padding: 0 5px;
+			box-sizing: border-box;
+		}
+		.list header{
+			height: 40px;
+			padding: 0 20px;
+			background: black;
+			position: relative;
+		}
+		.list header span{
+			color: white;
+			font: 16px/40px 'Microsoft';
+		}
+		.list header span:last-of-type{
+			position: absolute;
+			left: 480px;
+		}
+		#list2 li{
+			background: white;
+			height: 60px;
+			padding: 0 20px;
+			font: bold 16px/60px 'Microsoft';
+			position: relative;
+		}
+		#list2 li h2{
+			display: inline-block;
+			font-size: 16px;
+		}
+		#list2 li strong{
+			position: absolute;
+			left: 480px;
+			color: #de4a64;
+		}
+		#list2 li img{
+			width: 30px;
+			position: absolute;
+			right: 20px;
+			top: 14px;
+		}
+		#list2 li:nth-of-type(even){
+			background: rgb(234, 234, 234);
+		}
+	</style>
+</head>
+<body>
+	<ul id="list1">
+		<li>
+			<header>
+				<input type="text" placeholder="例如：2017 12 7 14:30:0" value="2017 12 7 21:30:0">
+				<button>确定</button>
+			</header>
+			<section>
+				<div class="head">剩余 <span>0</span><span>0</span>:<span>0</span><span>0</span>:<span>0</span><span>0</span></div>
+				<img src="1.jpg" alt="">
+				<h2>iphone7s plus 酷炫手机</h2>
+				<div class="foot"><span>抢购价: </span><strong>￥8000</strong></div>
+			</section>
+			<div class="mask">
+				<div class="gray"></div>
+				<div class="ico">商品已下架</div>
+			</div>
+		</li>
+		<li>
+			<header>
+				<input type="text" placeholder="例如：2017 12 7 14:30:0">
+				<button>确定</button>
+			</header>
+			<section>
+				<div class="head">
+					剩余 <span>0</span><span>0</span>:<span>0</span><span>0</span>:<span>0</span><span>0</span></div>
+				<img src="2.jpg" alt="">
+				<h2>27 英寸配备 Retina 5K显示屏</h2>
+				<div class="foot"><span>抢购价: </span><strong>￥15999</strong></div>
+			</section>
+			<div class="mask">
+				<div class="gray"></div>
+				<div class="ico">商品已下架</div>
+			</div>
+		</li>
+		<li>
+			<header>
+				<input type="text" placeholder="例如：2017 12 7 14:30:0">
+				<button>确定</button>
+			</header>
+			<section>
+				<div class="head">剩余 <span>0</span><span>0</span>:<span>0</span><span>0</span>:<span>0</span><span>0</span></div>
+				<img src="3.jpg" alt="">
+				<h2>魅族、锤子、小米“集”群</h2>
+				<div class="foot"><span>抢购价: </span><strong>￥20000</strong></div>
+			</section>
+			<div class="mask">
+				<div class="gray"></div>
+				<div class="ico">商品已下架</div>
+			</div>
+		</li>
+		<li>
+			<header>
+				<input type="text" placeholder="例如：2017 12 7 14:30:0">
+				<button>确定</button>
+			</header>
+			<section>
+				<div class="head">剩余 <span>0</span><span>0</span>:<span>0</span><span>0</span>:<span>0</span><span>0</span></div>
+				<img src="4.jpg" alt="">
+				<h2>iWatch 智能手表不智能</h2>
+				<div class="foot"><span>抢购价: </span><strong>￥5000</strong></div>
+			</section>
+			<div class="mask">
+				<div class="gray"></div>
+				<div class="ico">商品已下架</div>
+			</div>
+		</li>
+	</ul>
+	<div class="list">
+		<header><span>商品</span><span>价钱</span></header>
+		<ul id="list2">
+			<!-- <li><h2>iphone7s plus 酷炫手机</h2><strong>￥8000</strong><img src="1.jpg" alt=""></li> -->
+		</ul>
+	</div>
+	<script>
+		const lists1=document.querySelectorAll('#list1 li'),
+			lists2=document.querySelector('#list2');
+
+		for (let i = 0,len=lists1.length; i < len; i++) {
+			compute(lists1[i]);
+		}
+
+		function toDou(num) {
+			return num<10? '0'+num : num+'';
+		}
+		function shake(obj) {
+			let a=[],n=0;
+			for (var i = 10; i > -1; i-=2) {
+				a.push(i,-i);
+			}
+			a.push(0);
+			obj.timer=setInterval(function () {
+				obj.style.left=a[n++]+'px';
+				if (n==a.length) clearInterval(obj.timer);
+			},50)
+		}
+		function compute(list) {
+			const input=list.querySelector('input'),
+				spans=list.querySelector('.head').querySelectorAll('span'),
+				button=list.querySelector('button'),
+				mask=list.querySelector('.mask'),
+				gray=mask.querySelector('.gray'),
+				ico=mask.querySelector('.ico'),
+				title=list.querySelector('section h2').innerHTML,
+				price=list.querySelector('.foot strong').innerHTML,
+				img=list.querySelector('section img').src;
+			let flag=0;
+			button.onclick=function () {
+				if (flag) return;
+				flag=1;
+				button.timer=setInterval(function () {
+					let terminalT=new Date(input.value? input.value:alert('请输入截止时间')),
+						nowT=new Date();
+					let t=(terminalT-nowT)/1000;
+					if (t<1) {
+						t=0;
+						mask.style.display='block';
+						setTimeout(function () {
+							gray.style.background='rgba(0,0,0,.7)';
+							ico.style.transform='rotate(-30deg) scale(1)';
+							setTimeout(function () {
+								shake(list);
+							},100)
+							lists2.innerHTML+=`<li><h2>${title}</h2><strong>${price}</strong><img src="${img}" alt=""></li>`;
+						},40);
+						clearInterval(button.timer);
+						flag=0;
+					} 
+					let	lagH=Math.floor(t/3600),
+						lagM=Math.floor(t%3600/60),
+						lagS=Math.floor(t%3600%60);
+					let str=`${toDou(lagH)}${toDou(lagM)}${toDou(lagS)}`;
+					for (var i = 0,len=spans.length; i < len; i++) {
+						spans[i].innerHTML=str[i];
+					}
+				},1000)	
+			}
+		}
+	</script>
+</body>
+</html>
+

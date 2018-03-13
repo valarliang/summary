@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		body{
+			background: #7cb3f5;
+		}
+		#wrap{
+			width: 1200px;
+			background: #7367c8;
+			border-radius: 10px;
+			margin: 20px auto;
+			position: relative;
+		}
+		#wrap:after{
+			content: '';
+			display: block;
+			clear: both;
+		}
+		textarea{
+			width: 420px;
+			height: 490px;
+			resize: none;
+			overflow: hidden;
+			border: 1px solid #4e34a0;
+			border-radius: 6px;
+			margin: 30px;
+			padding: 20px;
+			font: 14px/20px 'Microsoft';
+			box-sizing: border-box;
+			float: left;
+		}
+		p{
+			width: 420px;
+			height: 490px;
+			border: 1px solid #4e34a0;
+			background: white;
+			border-radius: 6px;
+			margin: 30px;
+			padding: 20px;
+			font: 14px/20px 'Microsoft';
+			box-sizing: border-box;
+			float: right;
+			word-break: break-all;
+			overflow: hidden;
+		}
+		#btn{
+			width: 140px;
+			font: 16px/50px 'Microsoft';
+			background: #6de0fd;
+			border-radius: 6px;
+			color: white;
+			border: none;
+			outline: none;
+			margin: 250px 50px;
+		}
+		#count{
+			display: inline-block;
+			width: 100px;
+			text-align: center;
+			font: 16px/40px 'Microsoft';
+			color: #6de0fd;
+			position: absolute;
+			top: 300px;
+			left: 550px;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<textarea cols="30" rows="10"></textarea>
+		<button id="btn">把文字往右移</button>
+		<span id="count">0/0</span>
+		<p></p>
+	</div>
+	<script>
+		const btn=document.querySelector('#btn'),
+			textarea=document.querySelector('textarea'),
+			p=document.querySelector('p'),
+			cnt=document.querySelector('#count');
+		btn.onclick=function () {
+			if (!textarea.value) {
+				alert('请输入内容');
+			}else{
+				p.innerHTML='';
+				n=textarea.value.length;
+				let n2=p.innerText.length;
+				cnt.innerHTML=n2+'/'+n;
+				this.timer=setInterval(function () {
+					p.innerHTML+=textarea.value[0];
+					textarea.value=textarea.value.slice(1);
+					cnt.innerHTML=++n2+'/'+n;
+					if (!textarea.value) clearInterval(btn.timer);
+				},60)
+			}
+			
+		}
+	</script>
+</body>
+</html>

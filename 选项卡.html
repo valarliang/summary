@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.active{
+		    background: yellow;
+		}
+		div.show{
+		    display: block;
+		}
+		#wrap{
+			width: 100%;
+			height: 100%;
+		}
+		div{
+		    width:150px;
+		    height: 150px;
+		    border: 1px solid #000;
+		    display: none;
+		}
+	</style>
+</head>
+<body>
+	<section id="wrap">
+		<button class="active">按钮1</button>
+		<button>按钮2</button>
+		<button>按钮3</button>
+		<div class="show">111111</div>
+		<div>22222</div>
+		<div>333</div>
+	</section>
+<script>
+	function Tab(id) {
+		this.target=document.getElementById(id);
+		this.btns=this.target.querySelectorAll('button');
+		this.divs=this.target.querySelectorAll('div');
+		this.num=0;
+	}
+	Tab.prototype={
+		addevent (type='click') {
+			let that=this;
+			for (let i = 0; i < this.btns.length; i++) {
+				this.btns[i].addEventListener(type,function () {
+					that.change(i);
+				})
+			}
+		},
+		change (index) {
+			for (var i = 0; i < this.btns.length; i++) {
+				this.btns[i].className='';
+				this.divs[i].className='';
+			}
+			this.btns[index].className='active';
+			this.divs[index].className='show';
+		},
+		autoplay () {
+			let that=this;
+			this.target.timer=setInterval(function () {
+				that.change(++that.num%that.btns.length);
+			},1000)
+		}
+	}
+	let t=new Tab('wrap');
+	t.addevent();
+	t.autoplay();
+</script>
+</body>
+</html>

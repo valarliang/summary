@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		body{position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);width: 300px;height: 600px;border:3px solid black;}
+		#section1{height: 550px;overflow:auto;}
+		.clearfix:after{content:'';display: block;clear: both;}
+		.display1{position:relative;margin: 10px 8px;}
+		.display1 img{position:absolute;left: 0;}
+		.display1 span{position:absolute;display: inline-block;left: 30px;top:12px;border-top: 14px solid whitesmoke;border-left: 12px solid transparent;}
+		.display1 p{float:left;margin-left: 40px;white-space: pre-wrap;background: whitesmoke;padding: 5px;word-break: break-all;border-radius: 8px;}
+		.display2{position:relative;margin: 10px 8px;}
+		.display2 img{position:absolute;right: 0;}
+		.display2 p{float:right;margin-right: 40px;white-space: pre-wrap;background: yellowgreen;padding: 5px;word-break: break-all;border-radius: 8px;}
+		.display2 span{position:absolute;display: inline-block;right: 30px;top:12px;border-top: 14px solid yellowgreen;border-right: 12px solid transparent;}
+		#foot{position:fixed;width:100%;height:50px;bottom: 0;text-align: center;border-top:1px solid darkgray;}
+		#foot img{position: absolute;border: 1px solid darkgray;border-radius: 8px;margin:0 5px;left: 0;top: 50%;transform: translate(0,-50%);padding: 2px;}
+		#text{position: absolute;border: 1px solid darkgray;border-radius: 8px;height:30px;width:190px;margin:0 5px;left: 40px;top: 50%;transform: translate(0,-50%);}
+		#button{position: absolute;right: 5px;font:26px/50px 'serif';color: darkgray;cursor: pointer;}
+		/*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/
+		::-webkit-scrollbar{
+		    width: 10px;
+		    background-color: #f5f5f5;
+		}
+		/*定义滚动条的轨道，内阴影及圆角*/
+		::-webkit-scrollbar-track{
+		    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+		    border-radius: 10px;
+		    background-color: #f5f5f5;
+		}
+		/*定义滑块，内阴影及圆角*/
+		::-webkit-scrollbar-thumb{
+		    /*width: 10px;*/
+		    height: 20px;
+		    border-radius: 10px;
+		    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+		    background-color: #555;
+		}
+	</style>
+</head>
+<body>
+	<section id="section1"></section>
+	<section>
+		<!-- <div class="clearfix display1">
+			<img id="character1" src="1.png">
+			<span></span>
+			<p id="message1"> </p>
+		</div>
+		<div class="clearfix display2">
+			<img id="character2" src="2.png">
+			<span></span>
+			<p id="message2"> </p>
+		</div> -->
+		<div id="foot">
+			<img id="character" src="">
+			<input id="text" type="text">
+			<p id="button">发送</p>
+		</div>
+	</section>
+	<script>
+		var oText=document.getElementById('text'),
+			oCharact=document.getElementById('character'),
+			oButton=document.getElementById('button'),
+			oSection=document.getElementById('section1'),
+			aImg=['1.png','2.png'],
+			num=0;
+		function charact() {
+			oCharact.src=aImg[num];
+		}
+		charact();
+		oCharact.onclick=function () {
+			num++;
+			if (num==2) {
+				num=0;
+			}
+			oCharact.src=aImg[num];
+		}
+		oButton.onclick=function () {
+			if (num==0) {
+				oSection.innerHTML='<div class="clearfix display1"><img id="character1" src="1.png"><span></span><p id="message1">'+oText.value+'</p></div>'+oSection.innerHTML;
+			}else{
+				oSection.innerHTML='<div class="clearfix display2"><img id="character2" src="2.png"><span></span><p id="message2">'+oText.value+'</p></div>'+oSection.innerHTML;
+			}
+			oText.value='';
+		}
+	</script>
+</body>
+</html>
